@@ -1,0 +1,8 @@
+.footer, .push {
+    height: 155px;
+}
+
+#myCanvas {
+    background:#fff;
+    border:1px solid #cbcbcb;
+}

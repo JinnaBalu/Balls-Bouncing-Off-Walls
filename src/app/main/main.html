@@ -1,8 +1,28 @@
 <div>
     <bba-navbar></bba-navbar>
 </div>
+<section id="about">
+    <div class="container">
 
-<div class="jumbotron text-center">
+        <div class="row">
+            <div class="col-lg-4">
+                <h3>Guide</h3>
+                <h6>Click on the panel to get new ball or click on Add Ball button </h6>
+                <button type="button"  class="btn btn-primary" data-ng-click="addBall()">Add Ball</button>
+                <button type="button"  class="btn btn-warning" data-ng-click="removeBall()">Remove Ball</button>
+                <br>
+                <br>
+                <b>No. of Balls :  {{ballsList.length}}</b>
+            </div>
+            <div class="col-lg-8">
+                <canvas id="ballsBounceCanvas" width="800" height="530">
+                </canvas>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
 
-</div>
-
+            </div>
+        </div>
+    </div>
+</section>
