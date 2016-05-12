@@ -9,28 +9,36 @@ angular.module('ballsbouncingapp').factory('MainService', [function () {
         ball.yunits = Math.sin(ball.radians) * ball.speed;
     };
 
-    var generateBall = function(radius, speed, canvas) {
-        var x = radius * 2 + (Math.floor(Math.random() * canvas.width) - radius * 2);
-        var y = radius * 2 + (Math.floor(Math.random() * canvas.height) - radius * 2);
+    function getMousePosition(canvas, evt) {
+        var rectangle = canvas.getBoundingClientRect();
+        return {
+            x: evt.clientX - rectangle.left,
+            y: evt.clientY - rectangle.top
+        };
+    }
+
+    var generateBall = function(radius, speed, canvas, event) {
+        if(event){
+        var coordinates = getMousePosition(canvas,event);
+        }
+        
         var angle = Math.floor(Math.random() * 360);
         var radians = angle * Math.PI / 180;
         var xUnits = Math.cos(radians) * speed;
         var yUnits = Math.sin(radians) * speed;
-        return {x: x, y: y, radius: radius, speed: speed, angle:angle, xunits: xUnits, yunits: yUnits};
+        return {
+            x: (coordinates !== undefined && coordinates !== null)? coordinates.x:(radius * 2 + (Math.floor(Math.random() * canvas.width) - radius * 2)),
+            y: (coordinates !== undefined && coordinates !== null)? coordinates.y : radius * 2 + (Math.floor(Math.random() * canvas.height) - radius * 2),
+            radius: radius,
+            speed: speed,
+            angle:angle,
+            xunits: xUnits,
+            yunits: yUnits
+        };
     };
-
-    function getRandomColor() {
-        var letters = 'ABCDE'.split('');
-        var color = '#';
-        for (var i = 0; i < 3; i++) {
-            color += letters[Math.floor(Math.random() * letters.length)];
-        }
-        return color;
-    }
 
     mainServiceFactory.updateBall = updateBall;
     mainServiceFactory.generateBall = generateBall;
-    mainServiceFactory.getRandomColor = getRandomColor;
 
     return mainServiceFactory;
 }

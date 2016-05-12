@@ -2,18 +2,13 @@
 
 angular.module('ballsbouncingapp').controller('MainController', ['$scope', 'MainService', function($scope, MainService){
 
-    $scope.ballsBounceCanvas = document.getElementById("ballsBounceCanvas");
-    $scope.context = $scope.ballsBounceCanvas.getContext("2d");
-
-    $scope.ballsBounceCanvas.addEventListener('click', function(event) {
-        $scope.ballsList.push(MainService.generateBall($scope.radius, $scope.speed, $scope.ballsBounceCanvas));
-    }, false);
-
     var init = function(){
+        $scope.ballsBounceCanvas = document.getElementById("ballsBounceCanvas");
+        $scope.context = $scope.ballsBounceCanvas.getContext("2d");
         $scope.speed = 5;
         $scope.radius = 10;
-        $scope.ballsList = new Array();
-        $scope.ballsList.push(MainService.generateBall($scope.radius, $scope.speed, $scope.ballsBounceCanvas));
+        $scope.ballsList = [];
+        $scope.ballsList.push(MainService.generateBall($scope.radius, $scope.speed, $scope.ballsBounceCanvas, false));
         setInterval(drawBallBouncingScreen, 33);
     };
 
@@ -46,7 +41,7 @@ angular.module('ballsbouncingapp').controller('MainController', ['$scope', 'Main
     }
 
     $scope.addBall = function(){
-        $scope.ballsList.push(MainService.generateBall($scope.radius, $scope.speed, $scope.ballsBounceCanvas));
+        $scope.ballsList.push(MainService.generateBall($scope.radius, $scope.speed, $scope.ballsBounceCanvas, false));
     };
 
     $scope.removeBall = function(){
@@ -54,4 +49,8 @@ angular.module('ballsbouncingapp').controller('MainController', ['$scope', 'Main
     };
 
     init();
+
+    $scope.ballsBounceCanvas.addEventListener('click', function(event) {
+        $scope.ballsList.push(MainService.generateBall($scope.radius, $scope.speed, $scope.ballsBounceCanvas, event));
+    }, false);
 }]);
