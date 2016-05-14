@@ -7,6 +7,7 @@ angular.module('ballsbouncingapp').factory('MainService', [function () {
         ball.radians = ball.angle * Math.PI / 180;
         ball.xunits = Math.cos(ball.radians) * ball.speed;
         ball.yunits = Math.sin(ball.radians) * ball.speed;
+
     };
 
     function getMousePosition(canvas, evt) {
@@ -21,7 +22,7 @@ angular.module('ballsbouncingapp').factory('MainService', [function () {
         if(event){
         var coordinates = getMousePosition(canvas,event);
         }
-        
+
         var angle = Math.floor(Math.random() * 360);
         var radians = angle * Math.PI / 180;
         var xUnits = Math.cos(radians) * speed;
@@ -33,12 +34,20 @@ angular.module('ballsbouncingapp').factory('MainService', [function () {
             speed: speed,
             angle:angle,
             xunits: xUnits,
-            yunits: yUnits
+            yunits: yUnits,
+            color: 'rgb(' + (Math.random()*238).toFixed(0) + ', ' +
+                (Math.random()*238).toFixed(0) + ', ' +
+                (Math.random()*238).toFixed(0) + ')'
         };
+    };
+
+    var degree = function(value){
+        return value * (Math.PI / 180);
     };
 
     mainServiceFactory.updateBall = updateBall;
     mainServiceFactory.generateBall = generateBall;
+    mainServiceFactory.degree = degree;
 
     return mainServiceFactory;
 }

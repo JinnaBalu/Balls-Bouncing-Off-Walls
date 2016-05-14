@@ -1,28 +1,39 @@
 <div>
     <bba-navbar></bba-navbar>
 </div>
-<section id="about">
-    <div class="container">
-
+<div class="col-md-12" id="bouncingBalls">
+    <h2>Bouncing Balls</h2>
+    <hr>
+    <div class="block">
         <div class="row">
             <div class="col-lg-4">
-                <h3>Guide</h3>
-                <h6>Click on the panel to get new ball or click on Add Ball button </h6>
-                <button type="button"  class="btn btn-primary" data-ng-click="addBall()">Add Ball</button>
-                <button type="button"  class="btn btn-warning" data-ng-click="removeBall()">Remove Ball</button>
-                <br>
-                <br>
-                <b>No. of Balls :  {{ballsList.length}}</b>
+                <div class="well">
+                    <h4>Bouncing Balls Events</h4>
+                    <hr />
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <button type="button"  class="btn btn-primary" data-ng-click="addBall()">Add</button>
+                            <button type="button"  class="btn btn-warning" data-ng-click="removeBall()">Remove</button>
+                            <button type="button" id="button_play" class="btn" data-ng-click="playPausePress(play)"> {{playPauseValue}}</button>
+                            <br><br>
+                            <small>Click on the Panel/Add to get new ball</small>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <label>Speed</label> :
+                        </div>
+                        <div class="col-lg-8">
+                            <input type="range" id="ballSpeed" data-ng-change="setSpeed(speed)"  data-ng-model="speed"/>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="col-lg-8">
-                <canvas id="ballsBounceCanvas" width="800" height="530">
+                <canvas id="ballsBounceCanvas" width="868" height="450">
                 </canvas>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-4">
-
-            </div>
-        </div>
     </div>
-</section>
+</div>
